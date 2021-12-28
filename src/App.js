@@ -42,9 +42,7 @@ class App extends Component {
             {cards}
           </div>
         </div>
-        <Admin chargerExemple={this.chargerExemple}
-          ajouterRecette = {this.ajouterRecette}>
-        </Admin>
+        <Admin chargerExemple={this.chargerExemple} AjouterRecette= {this.ajouterRecette}/>
       </div>
     )
   }
