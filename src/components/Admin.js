@@ -28,6 +28,10 @@ class Admin extends Component{
             chef:box.chef || authData.user.uid
         })
     }
+    logout = async () =>{
+        await firebase.auth().signOut()
+        this.setState({uid:null})
+    }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
         if(!this.state.uid){
@@ -38,13 +42,11 @@ class Admin extends Component{
             return (
                 <div>
                     <p>Tu n'es pas le chef de cette boite!</p>
+                    {logout}
                 </div>
             )
         }
-        logout = async () =>{
-            await firebase.auth().signOut()
-            this.setState({uid:null})
-        }
+        const logout = <button onClick={this.logout}>Déconnexion</button>
         return(
             <div className="cards">
                 <AjouterRecette ajouterRecette={this.props.ajouterRecette}/>
@@ -57,6 +59,7 @@ class Admin extends Component{
                   supprimerRecette={this.props.supprimerRecette}/> )
                 }
             <footer>
+                {logout}
                 <button onClick={this.props.chargerExemple}>Remplir</button>
             </footer>
             </div>
