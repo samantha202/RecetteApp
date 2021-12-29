@@ -48,9 +48,7 @@ class App extends Component {
       <div className='box'>
         <Header pseudo={this.state.pseudo}/>
         <div className='cards'>
-          <div className='card'>
             {cards}
-          </div>
         </div>
         <Admin 
           chargerExemple={this.chargerExemple} 
@@ -58,7 +56,7 @@ class App extends Component {
           majRecette={this.majRecette}
           supprimerRecette={this.supprimerRecette}
           recette={this.state.recettes}
-          ch/>
+          />
       </div>
     )
   }

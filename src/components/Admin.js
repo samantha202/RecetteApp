@@ -1,8 +1,18 @@
 import React, { Component } from "react";
 import AjouterRecette from "./AjouterRecette";
 import AdminForm from "./AdminForm";
+import firebase from "firebase/app";
+import 'firebase/auth'
+import base, {firebaseApp} from '../base'
 
 class Admin extends Component{
+    state = {
+        uid: null,
+        chef: null
+    }
+    authenticate = () =>{
+       firebaseApp.auth().signInWithPopup('facebbokAuthProvider').then(this.handleAuth)
+    }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
         return(
