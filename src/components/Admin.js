@@ -32,6 +32,13 @@ class Admin extends Component{
         await firebase.auth().signOut()
         this.setState({uid:null})
     }
+    componentDidMount(){
+        firebase.auth().onAuthStateChanged(user =>{
+            if(user){
+                this.handleAuth({user})
+            }
+        })
+    }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
         if(!this.state.uid){
