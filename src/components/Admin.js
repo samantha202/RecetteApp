@@ -4,6 +4,7 @@ import AdminForm from "./AdminForm";
 import firebase from "firebase/app";
 import 'firebase/auth'
 import base, {firebaseApp} from '../base'
+import Login from "./Login";
 
 class Admin extends Component{
     state = {
@@ -11,10 +12,17 @@ class Admin extends Component{
         chef: null
     }
     authenticate = () =>{
-       firebaseApp.auth().signInWithPopup('facebbokAuthProvider').then(this.handleAuth)
+       const authProvider = new firebase.auth.FacebookAuthProvider()
+       firebaseApp.auth().signInWithPopup(authProvider).then(this.handleAuth)
+    }
+    handleAuth = authData => {
+        console.log(authData)
     }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
+        if(!this.state.uid){
+           return <Login authenticate={this.authenticate} />
+        }
         return(
             <div className="cards">
                 <AjouterRecette ajouterRecette={this.props.ajouterRecette}/>
