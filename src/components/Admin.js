@@ -41,6 +41,10 @@ class Admin extends Component{
                 </div>
             )
         }
+        logout = async () =>{
+            await firebase.auth().signOut()
+            this.setState({uid:null})
+        }
         return(
             <div className="cards">
                 <AjouterRecette ajouterRecette={this.props.ajouterRecette}/>
