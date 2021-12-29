@@ -11,12 +11,18 @@ class Admin extends Component{
         uid: null,
         chef: null
     }
+
     authenticate = () =>{
        const authProvider = new firebase.auth.FacebookAuthProvider()
        firebaseApp.auth().signInWithPopup(authProvider).then(this.handleAuth)
     }
-    handleAuth = authData => {
-        console.log(authData)
+    handleAuth = async authData => {
+        const box = await base.fetch(this.props.pseudo,{context: this})
+        if(!box.chef){
+            await base.post(`${this.props.speudo}/chef`,{
+                data: authData.user.uid
+            })
+        }
     }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
