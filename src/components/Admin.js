@@ -23,11 +23,23 @@ class Admin extends Component{
                 data: authData.user.uid
             })
         }
+        this.setState({
+            uid: authData.user.uid,
+            chef:box.chef || authData.user.uid
+        })
     }
     render () {
         //const {recettes, ajouterRecette, majRecette, chargerExemple} = this.props
         if(!this.state.uid){
            return <Login authenticate={this.authenticate} />
+        }
+        
+        if(!this.state.uid !== this.state.chef){
+            return (
+                <div>
+                    <p>Tu n'es pas le chef de cette boite!</p>
+                </div>
+            )
         }
         return(
             <div className="cards">
